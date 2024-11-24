@@ -6,6 +6,7 @@
 #include <vector>
 #include <string>
 #include <iomanip>
+#include<cmath>
 
 using namespace std;
 
@@ -70,7 +71,7 @@ using namespace std;
 	        cout<<endl;
 }
 }*/
-/*void vAufgabe2(){
+void vAufgabe2(){
 	int iPKWZahl , iFahrradZahl ;
 	cout<< "wieviel PKWs wollen Sie erstellen ?  " ;
 	cin >> iPKWZahl ;
@@ -104,19 +105,13 @@ using namespace std;
 	cout<<endl;
 	Fahrrads.push_back(move(make_unique<Fahrrad>(name , MaxGeschwindigkeit)));
 	}
-	 Fahrzeug::vKopf();
 dGlobaleZeit = 0.0;
 double dSimulationDauer = 5.0 ;
 double dZeitSchritt = 0.5;
 
 while (dGlobaleZeit < dSimulationDauer) {
 	dGlobaleZeit += dZeitSchritt;
-
-if (static_cast<int>(dGlobaleZeit) % 3 == 0) {
-	 cout << "PKW wird nach" << dGlobaleZeit << "stunden getankt " << endl;
-	   for (auto& pkw : PKWs) {
-	        pkw->dTanken();
-	    }
+	 Fahrzeug::vKopf();
 for (auto& pkw : PKWs) {
  pkw->vSimulieren();
  pkw->vAusgabe(cout);
@@ -127,38 +122,49 @@ for (auto& fahrrad : Fahrrads) {
  fahrrad->vAusgabe(cout);
  fahrrad->dGeschwindigkeit();
 		        }
+double dletzteTankZeit= 0.0;
+if (std::fabs(std::fmod(dGlobaleZeit, 3.0)) < 0.0001 && dGlobaleZeit - dletzteTankZeit >= 3.0) {
+    for (auto& pkw : PKWs) {
+    	 cout <<pkw->getName() <<" wird nach " << dGlobaleZeit << " Stunden getankt." << endl;
+        pkw->dTanken();
+    }
+    dletzteTankZeit = dGlobaleZeit;
+}
+
 cout<<endl;
 }
 }
-}*/
+
 void vAusgabe3() {
     Fahrzeug f1("Car1", 100);
     Fahrzeug f2("Car2", 120);
     PKW p1("BMW", 150, 8.0);
-    Fahrrad b1("Bike", 30);
+    Fahrrad b1("BMX", 30);
+cout<<"\n hier werden wir vAusgabe3 nutzen um Operatoren zu testen" << endl;
+    cout<<"operator<<:" <<endl;
+    Fahrzeug::vKopf();
+    cout<<f1<<endl;
+    cout<<f2<<endl;
+    cout<<p1<<endl;
+    cout<<b1<<endl;
 
-    std::cout << "Testing operator<<:" << std::endl;
-    std::cout << f1 << std::endl;
-    std::cout << f2 << std::endl;
-    std::cout << p1 << std::endl;
-    std::cout << b1 << std::endl;
-
-    std::cout << "\nTesting operator<:" << std::endl;
+    cout << "\n jetzt uberprufen wir der operator< : " <<endl <<endl;
     if (f1 < f2) {
-        std::cout << f1.getName() << " has traveled less distance than " << f2.getName() << "." << std::endl;
+        std::cout << f1.getName() << " is weniger als " << f2.getName() << " gefahren" << std::endl;
     } else {
-        std::cout << f1.getName() << " has traveled more or equal distance than " << f2.getName() << "." << std::endl;
+        std::cout << f1.getName() << " ist mehr oder gleich " << f2.getName() << " gefahren" << std::endl;
     }
 
-    std::cout << "\nTesting assignment operator:" << std::endl;
-    std::cout << "Before assignment, f1: " << f1 << std::endl;
+    cout<< "\n jetzt uberprufen wir der =operator:" <<endl;
+    cout<< "bevor wir der Operator nutzen, f1 : " << f1 << std::endl;
     f1 = f2;
-    std::cout << "After assignment, f1: " << f1 << std::endl;
+    std::cout << "danach , f1: " << f1 << std::endl;
+    cout<<endl;
 }
 
 
 int main () {
-	//vAufgabe2();
+	vAufgabe2();
 	vAusgabe3();
 	return 0 ;
 }
