@@ -22,10 +22,3 @@ std::ostream& operator<<(std::ostream& o, const Fahrzeug& x){
 	x.vAusgabe(o);
 	return o;
 };
-Fahrzeug& Fahrzeug::operator=(const Fahrzeug& other) {
-    if (this == &other) return *this;
-    p_sName = other.p_sName;
-    p_dMaxGeschwindigkeit = other.p_dMaxGeschwindigkeit;
-    return *this;
-}
-
