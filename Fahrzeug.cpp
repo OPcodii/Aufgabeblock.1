@@ -19,7 +19,7 @@ void Fahrzeug::vKopf() {
 void Fahrzeug::vAusgabe(std::ostream& o) const {
     o << std::setw(10) << std::setiosflags(std::ios::left) << p_iID;
     o << std::setw(20) << std::setiosflags(std::ios::left) << p_sName;
-    o << std::setw(20) << std::setiosflags(std::ios::left) << p_dMaxGeschwindigkeit;
+    o << std::setw(20) << std::setiosflags(std::ios::left) << dGeschwindigkeit();
     o << std::setw(20) << std::setiosflags(std::ios::left) << p_dGesamtStrecke;
 }
 
@@ -39,3 +39,10 @@ double Fahrzeug::dGeschwindigkeit() const {
 bool Fahrzeug::operator<(const Fahrzeug& other) const {
     return p_dGesamtStrecke < other.p_dGesamtStrecke;
 }
+Fahrzeug& Fahrzeug::operator=(const Fahrzeug& other) {
+    if (this == &other) return *this; // Handle self-assignment
+    p_sName = other.p_sName;
+    p_dMaxGeschwindigkeit = other.p_dMaxGeschwindigkeit;
+    return *this;
+}
+
